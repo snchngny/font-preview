@@ -1,0 +1,86 @@
+{
+  "retrieved": "2026-10-22",
+  "files": [
+    {
+      "filename": "NotoSansCJKjp-Regular.otf",
+      "family": "PreviewNotoCJK",
+      "weight": 400,
+      "bytes": 16467736,
+      "sha256": "68a3fc98800b2a27b371f2fb79991daf3633bd89309d4ffaa6946fd587f375b5",
+      "source": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/Japanese/NotoSansCJKjp-Regular.otf",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "filename": "NotoSansCJKjp-Bold.otf",
+      "family": "PreviewNotoCJK",
+      "weight": 700,
+      "bytes": 17032620,
+      "sha256": "e53dcb0dcb2922e45d01aae1ebd2f382bb81d4229b18b6b883bd170678af1f76",
+      "source": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/OTF/Japanese/NotoSansCJKjp-Bold.otf",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "filename": "NotoSansJP-Regular.otf",
+      "family": "PreviewNotoJP",
+      "weight": 400,
+      "bytes": 4533028,
+      "sha256": "dff723ba59d57d136764a04b9b2d03205544f7cd785a711442d6d2d085ac5073",
+      "source": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/SubsetOTF/JP/NotoSansJP-Regular.otf",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "filename": "NotoSansJP-Bold.otf",
+      "family": "PreviewNotoJP",
+      "weight": 700,
+      "bytes": 4656448,
+      "sha256": "1b0edfb500b73a4fa8a4fcaae1bbbd403994e08e73e3e0da37e70d3853f42c5f",
+      "source": "https://raw.githubusercontent.com/notofonts/noto-cjk/main/Sans/SubsetOTF/JP/NotoSansJP-Bold.otf",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "filename": "Arimo.ttf",
+      "family": "PreviewArimo",
+      "weight": "400 700",
+      "bytes": 496268,
+      "sha256": "e43898b143ec826ac8cb4034816458a7047fbe0836558de2a1f8c6223ae3e0ca",
+      "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/arimo/Arimo%5Bwght%5D.ttf",
+      "license": "SIL Open Font License 1.1"
+    },
+    {
+      "filename": "texgyreheros-regular.otf",
+      "family": "PreviewHeros",
+      "weight": 400,
+      "bytes": 133600,
+      "sha256": "6ae1a09d5a940367b7aaaa91ee8bd8a2c333bfe193e7096e23f931357d62081f",
+      "source": "https://mirrors.ctan.org/fonts/tex-gyre.zip",
+      "license": "GUST Font License / LPPL 1.3c"
+    },
+    {
+      "filename": "texgyreheros-bold.otf",
+      "family": "PreviewHeros",
+      "weight": 700,
+      "bytes": 135204,
+      "sha256": "b170162835f4efc288886dd4231406dc47e19b614cf4416836635599d44a7d60",
+      "source": "https://mirrors.ctan.org/fonts/tex-gyre.zip",
+      "license": "GUST Font License / LPPL 1.3c"
+    },
+    {
+      "filename": "IPAMonaPGothicA.ttf",
+      "family": "PreviewIPAMona",
+      "weight": 400,
+      "bytes": 3660356,
+      "sha256": "9b9c9f9b8a0abcccebf2709332e969a5a89f6465a45c73b95940b99df4a56543",
+      "source": "https://archive.org/details/ipamonafont-a-1.0.8.1",
+      "license": "Original IPA / Sazanami / Mona / M+ terms; complete driver bundle included in fonts/ipamona-a.zip"
+    },
+    {
+      "filename": "ipagp.ttf",
+      "family": "PreviewIPAPGothic",
+      "weight": 400,
+      "bytes": 6235712,
+      "sha256": "a63f6153841e56ec9df1b31a54d98d3f41d8aaa1c3d8df30a33502296f5b8068",
+      "source": "https://moji.or.jp/wp-content/ipafont/IPAfont/ipagp00303.zip",
+      "license": "IPA Font License Agreement v1.0"
+    }
+  ]
+}
