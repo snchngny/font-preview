@@ -2,6 +2,8 @@
 
 日本語と欧文のフォントを並べて比較する静的ページです
 
+公開サイト：https://font-preview-dun.pages.dev
+
 ## ビルドと公開
 
 Node.jsで次を実行すると、公開用ファイルが `dist/` に作られます
@@ -11,6 +13,8 @@ node build-site.mjs
 ```
 
 Cloudflare Pagesではビルドコマンドに `node build-site.mjs`、出力先に `dist` を指定します。生成物は依存パッケージを使わず、HTML、CSS、フォント、ライセンス資料で構成されます
+
+GitHubリポジトリは非公開、サイトは一般公開です。`main` へのpushでCloudflare Pagesが自動更新します
 
 ## データの扱い
 
