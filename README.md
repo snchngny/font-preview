@@ -4,7 +4,22 @@
 
 公開サイト：https://font-preview-dun.pages.dev
 
-## ビルドと公開
+## 作業場所とローカル確認
+
+正本はこの `apps/font-preview/` だけです。旧試作フォルダーは使用しません。
+
+変更後は先にローカルで確認します。このフォルダーで次を実行し、`index.html` をブラウザーで開きます。
+
+```powershell
+node build-fonts.mjs
+node verify-fonts.mjs
+```
+
+生成する `bundled-fonts.css` はローカル確認用で、Gitには含めません。
+
+## 公開
+
+ローカルで利用者が確認し、公開を明示的に依頼した版だけを公開します。修正依頼やローカルcommitを公開許可とは扱いません。
 
 Node.jsで次を実行すると、公開用ファイルが `dist/` に作られます
 
@@ -14,14 +29,10 @@ node build-site.mjs
 
 Cloudflare Pagesではビルドコマンドに `node build-site.mjs`、出力先に `dist` を指定します。生成物は依存パッケージを使わず、HTML、CSS、フォント、ライセンス資料で構成されます
 
-GitHubリポジトリは非公開、サイトは一般公開です。`main` へのpushでCloudflare Pagesが自動更新します
+GitHubリポジトリは非公開、サイトは一般公開です。Cloudflare Pagesの本番・プレビュー自動デプロイは停止しています。pushは明示依頼時だけ行い、公開は確認済みのcommitを指定して手動実行します。
 
 OS表示は元書体が一般的に使われる環境の目安で、閲覧端末の判定ではありません。各カードには、このブラウザーで読み込めた元書体・代替書体と利用可能な太さを表示します。
 
 ## データの扱い
 
 入力した文章はこのタブ内で処理し、追加したフォントだけをこのブラウザーのIndexedDBに保存します。どちらもサーバーへ送信せず、アクセス解析は行いません
-
-## オフライン確認
-
-`node build-fonts.mjs` でローカル確認用CSSを生成し、`index.html` を直接開きます。`bundled-fonts.css` は全フォントを埋め込むため、公開用ビルドでは使いません
