@@ -72,7 +72,7 @@ const ui=new Map();
 const doc={querySelector(selector){if(!ui.has(selector))ui.set(selector,element());return ui.get(selector);},getElementById(id){return this.querySelector('#'+id);},createElement:element,documentElement:element(),fonts:{load:async()=>[{}],add(){},delete(){}}};
 doc.querySelector('#size').value='28';doc.querySelector('#weight').value='400';doc.querySelector('#text').value='日本語ABC123 <>&\n'.repeat(150);
 const renderContext=vm.createContext({console,document:doc,Map,Uint8Array,DataView});
-vm.runInContext(script.slice(0,startup)+';this.api={fonts,render,initSubstitute,familyStack};',renderContext);
+vm.runInContext(script.slice(0,startup)+';this.api={fonts,render,initSubstitute,familyStack,detect};',renderContext);
 const renderApi=renderContext.api;
 for(const font of renderApi.fonts){font.card=element();font.sample=element();}
 renderApi.render();
@@ -83,7 +83,7 @@ assert.match(renderApi.fonts[0].card.querySelector('.compatibility-info').textCo
 assert.match(renderApi.fonts[1].card.querySelector('.compatibility-info').textContent,/一部文字に例外/);
 assert.match(renderApi.fonts[4].card.querySelector('.compatibility-info').textContent,/近似.*字幅一致は未確認/);
 assert.match(renderApi.fonts[5].card.querySelector('.compatibility-info').textContent,/AA向け字幅互換/);
-for(const i of [0,1])assert.ok(renderApi.familyStack(renderApi.fonts[i]).includes('PreviewNotoJP'),'Latin cards must disclose/use Japanese supplement');
+for(const i of [0,1])assert.ok(renderApi.familyStack(renderApi.fonts[i]).includes(renderApi.fonts.find(font=>font.id==='noto-jp').substitute.family),'Latin cards must use the Japanese supplement that actually loaded');
 assert.deepEqual(Array.from(renderApi.fonts[5].substitute.weights),[400]);
 assert.equal(doc.querySelector('#availability').textContent,'代替表示 6書体');
 for(const font of renderApi.fonts)font.detected={family:'Exact_'+font.id,proof:'端末の元フォント：'+font.name,weights:[400]};
@@ -92,8 +92,20 @@ for(const font of renderApi.fonts){assert.ok(font.sample.style.fontFamily.starts
 for(const font of renderApi.fonts)assert.match(font.card.querySelector('.compatibility-info').textContent,/実フォント（元の書体）/);
 assert.equal(doc.querySelector('#count').textContent,'実フォント 6 / 6');
 assert.equal(doc.querySelector('#availability').textContent,'代替表示 0書体');
+// 同梱元フォントは太字の読込にも成功した場合だけ700を提示する
+doc.fonts.load=async query=>query.startsWith('700')?[]:[{}];
+const notoJP=renderApi.fonts.find(font=>font.id==='noto-jp');notoJP.detected=null;notoJP.substitute=null;notoJP.originalLoad='pending';
+await renderApi.detect(notoJP);assert.deepEqual(Array.from(notoJP.detected.weights),[400]);
+assert.match(notoJP.card.querySelector('.load-status').textContent,/読込済 \(400\)/);
+// 通常書体も代替書体も読めないとき、成功表示を出さない
+doc.fonts.load=async()=>[];notoJP.detected=null;notoJP.substitute=null;notoJP.originalLoad='done';renderApi.render();
+assert.match(notoJP.card.querySelector('.load-status').textContent,/読込を確認できず/);
+assert.doesNotMatch(notoJP.card.querySelector('.load-status').textContent,/読込済/);
 // 保存済みの実フォントは検出済み書体・代替よりも優先
 renderApi.fonts[0].uploaded={family:'SavedArial',weight:400,proof:'Arial Regular'};renderApi.render();assert.ok(renderApi.fonts[0].sample.style.fontFamily.startsWith('"SavedArial"'));
+assert.match(renderApi.fonts[0].card.querySelector('.load-status').textContent,/元書体: 読込成功.*追加ファイル/);
+notoJP.uploaded={family:'SavedNotoJP',weight:400,proof:'Noto Sans JP Regular'};renderApi.render();
+for(const i of [0,1])assert.ok(renderApi.familyStack(renderApi.fonts[i]).includes('SavedNotoJP'),'Japanese supplement follows the loaded uploaded original');
 // 第一候補の読込失敗なら次の候補を明示
 for(const font of renderApi.fonts){font.detected=null;font.uploaded=null;}
 doc.fonts.load=async query=>query.includes('PreviewIPAMona')?[]:[{}];await renderApi.initSubstitute(renderApi.fonts[5]);assert.equal(renderApi.fonts[5].substitute.family,'PreviewIPAPGothic');
